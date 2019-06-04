@@ -24,6 +24,47 @@ nums2 = [3, 4]
  * @param {number[]} nums2
  * @return {number}
  */
-var findMedianSortedArrays = function(nums1, nums2) {
-    
+var findMedianSortedArrays = function (nums1, nums2) {
+    let imin, imax, m, n, i, j;
+    if (nums1.length > nums2.length) {
+        m = nums2;
+        n = nums1;
+    } else {
+        m = nums1;
+        n = nums2;
+    }
+    imin = 0;
+    imax = m.length;
+    let lenhalf = (m.length + n.length + 1) / 2;
+    while (imin <= imax) {
+        i = (imin + imax) / 2;
+        j = lenhalf - i;
+        if (i < imax && n[j - 1] > m[i]) {  //j>0
+            imin = i + 1;  //i is small
+        } else if (i > imin && m[i - 1] > n[j]) {
+            imax = i - 1;
+        } else {
+            let leftMax = 0;
+            if (i == 0) {
+                leftMax = n[j - 1];
+            } else if (j == 0) {
+                leftMax = m[i - 1];
+            } else {
+                leftMax = m[i - 1] >= n[j - 1] ? m[i - 1] : n[j - 1];
+            }
+            if ((m.length + n.length) % 2 == 1) {
+                return leftMax;
+            }
+            let rightMin = 0;
+            if (i = m.length) {
+                rightMin = n[j];
+            } else if (j = n.length) {
+                rightMin = m[i];
+            }else{
+                rightMin = n[j] <= m[i] ? n[j] : m[i];
+            }
+            return (leftMax + rightMin)/2;
+        }
+    }
+    return;
 };
