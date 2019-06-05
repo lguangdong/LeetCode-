@@ -1,0 +1,18 @@
+es6为方便继承新增了class，极大的化简了实现继承的代码量
+class Animal {
+    constructor(type){
+        this.type = type;
+    }
+    sayType(){
+        console.log(this.type);
+    }
+}
+class Cat extends Animal {
+    constructor(type,name){
+        super(type);
+        this.name = name;
+    }
+    sayName(){
+        console.log(this.name);
+    }
+}
